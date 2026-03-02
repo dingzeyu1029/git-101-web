@@ -7,17 +7,20 @@ import HomePage from './pages/home/HomePage'
 import LessonPage from './pages/lesson/LessonPage'
 import SummaryPage from './pages/summary/SummaryPage'
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'lesson/:lessonId', element: <LessonPage /> },
-      { path: 'lesson/:lessonId/summary', element: <SummaryPage /> },
-    ],
-  },
-])
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: 'lesson/:lessonId', element: <LessonPage /> },
+        { path: 'lesson/:lessonId/summary', element: <SummaryPage /> },
+      ],
+    },
+  ],
+  { basename: '/git-101-web' }
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
