@@ -1,0 +1,121 @@
+import type { Lesson } from '../../types'
+export default {
+  id: 8,
+  title: 'Merge Conflicts',
+  description: 'Resolve conflicts when branches collide',
+  steps: [
+    {
+      type: 'reading',
+      id: 'why-conflicts',
+      title: 'Why Do Conflicts Happen?',
+      content: [
+        {
+          type: 'text',
+          value:
+            'A **merge conflict** occurs when two branches modify the **same lines** in the same file. For example, if one branch changes line 10 to say `Welcome!` while another changes it to say `Hello!`, Git can\'t pick one automatically — it stops and asks you to decide.',
+        },
+        {
+          type: 'text',
+          value:
+            'Conflicts are a normal part of collaboration — not an error.',
+        },
+      ],
+    },
+    {
+      type: 'reading',
+      id: 'conflict-markers',
+      title: 'Reading Conflict Markers',
+      content: [
+        {
+          type: 'text',
+          value:
+            'When a conflict occurs, Git inserts **conflict markers** into the affected file:',
+        },
+        {
+          type: 'code',
+          language: 'text',
+          value:
+            '<<<<<<< HEAD\nWelcome to our website!\n=======\nWelcome to our amazing website!\n>>>>>>> feature-banner',
+        },
+        {
+          type: 'text',
+          value:
+            '- Everything between `<<<<<<< HEAD` and `=======` is what **your current branch** has.\n- Everything between `=======` and `>>>>>>> feature-banner` is what the **incoming branch** has.\n- You must edit the file to keep the version you want (or combine both), then **remove all conflict markers**.',
+        },
+      ],
+    },
+    {
+      type: 'reading',
+      id: 'resolution-workflow',
+      title: 'Resolving Conflicts Step by Step',
+      content: [
+        {
+          type: 'text',
+          value:
+            'Follow these steps to resolve a merge conflict:',
+        },
+        {
+          type: 'text',
+          value:
+            '1. Run `git status` to see which files have conflicts — they will be listed as "both modified."\n2. **Open** each conflicted file and find the conflict markers.\n3. **Edit** the file — choose one side, combine both, or write something new.\n4. **Remove** all `<<<<<<<`, `=======`, and `>>>>>>>` markers.\n5. **Stage** each resolved file with `git add`.\n6. **Commit** to complete the merge.',
+        },
+        {
+          type: 'code',
+          language: 'bash',
+          value:
+            '# After editing the file to resolve conflicts:\ngit add resolved-file.txt\ngit commit -m "Resolve merge conflict in resolved-file.txt"',
+        },
+      ],
+    },
+    {
+      type: 'reading',
+      id: 'aborting-merge',
+      title: 'Aborting a Merge',
+      content: [
+        {
+          type: 'text',
+          value:
+            'If you start a merge and realize you\'re not ready to deal with the conflicts, you can abort and go back to the state before the merge:',
+        },
+        {
+          type: 'code',
+          language: 'bash',
+          value:
+            'git merge --abort',
+        },
+        {
+          type: 'text',
+          value:
+            'This resets your working directory and staging area to the state before the merge. No changes are lost — your branches remain exactly as they were.',
+        },
+      ],
+    },
+    {
+      type: 'terminal-exercise',
+      id: 'stage-resolved',
+      prompt:
+        'You have manually resolved the conflict in "resolved-file.txt". Stage it to mark it as resolved:',
+      expectedCommand: 'git add resolved-file.txt',
+      acceptableVariants: [],
+      successOutput: '',
+      hints: [
+        'Use git add to mark the file as resolved',
+        'The filename is resolved-file.txt',
+      ],
+    },
+    {
+      type: 'quiz',
+      id: 'quiz-conflict-markers',
+      question: 'What does the ======= marker separate in a merge conflict?',
+      options: [
+        "Your current branch's changes from the incoming branch's changes",
+        'Staged changes from unstaged changes',
+        'Old commits from new commits',
+        'Local files from remote files',
+      ],
+      correctIndex: 0,
+      explanation:
+        "The ======= marker is the divider between your current branch's version (above) and the incoming branch's version (below) within the conflict block.",
+    },
+  ],
+} satisfies Lesson

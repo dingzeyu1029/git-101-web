@@ -1,0 +1,139 @@
+import { type KeyboardEvent, type Ref, useState, useRef, useEffect, useImperativeHandle } from 'react'
+import { motion } from 'framer-motion'
+
+type HistoryEntry = {
+  id: number
+  command: string
+  output: string
+  type: 'command' | 'success' | 'error'
+}
+
+type SubmitResult = {
+  correct: boolean
+  hint?: string
+}
+
+interface FakeTerminalProps {
+  ref?: Ref<FakeTerminalHandle>
+  onSubmit: (command: string) => SubmitResult
+  successOutput?: string
+  disabled: boolean
+  initialHistory?: HistoryEntry[]
+  onInputChange?: (hasValue: boolean) => void
+  onEnter?: () => void
+  className?: string
+}
+
+export interface FakeTerminalHandle {
+  submit: () => boolean | undefined
+}
+
+let nextEntryId = 0
+
+export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, initialHistory = [], onInputChange, onEnter, className }: FakeTerminalProps) {
+  const [input, setInput] = useState('')
+  const [history, setHistory] = useState<HistoryEntry[]>(initialHistory)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const terminalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!disabled) inputRef.current?.focus()
+  }, [disabled])
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight
+    }
+  }, [history])
+
+  useEffect(() => {
+    onInputChange?.(input.trim().length > 0)
+  }, [input, onInputChange])
+
+  function submit() {
+    if (!input.trim()) return
+    const command = input.trim()
+    const result = onSubmit(command)
+
+    const entry: HistoryEntry = { id: nextEntryId++, command, output: '', type: 'command' }
+
+    if (result.correct) {
+      entry.output = successOutput || 'Command executed successfully.'
+      entry.type = 'success'
+    } else {
+      entry.output = result.hint || 'Error: command not recognized. Try again.'
+      entry.type = 'error'
+    }
+
+    setHistory((prev) => [...prev, entry])
+    setInput('')
+    return result.correct
+  }
+
+  useImperativeHandle(ref, () => ({ submit }))
+
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' && input.trim()) {
+      if (onEnter) onEnter()
+      else submit()
+    }
+  }
+
+  return (
+    <div
+      className={`bg-[#1E1E1E] rounded-lg border border-[#333] overflow-hidden font-mono text-sm flex flex-col ${className || ''}`}
+    >
+      {/* Terminal Buttons */}
+      <div className="flex flex-row items-center gap-2 p-2 bg-[#2D2D2D] border-b border-[#333] shrink-0">
+        <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+        <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+        <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+        <span className="ml-2 text-[#888] text-sm">terminal</span>
+      </div>
+
+      <div ref={terminalRef} className="p-4 h-64 overflow-y-auto space-y-1">
+        {history.map((entry) => (
+          <div key={entry.id}>
+            <div className="flex items-center gap-2">
+              <span className="text-[#6A9955]">$</span>
+              <span className="text-[#D4D4D4]">{entry.command}</span>
+            </div>
+            {entry.output && (
+              <div
+                className={`ml-4 mt-0.5 whitespace-pre-wrap ${
+                  entry.type === 'success' ? 'text-[#999]' : 'text-[#F44747]'
+                }`}
+              >
+                {entry.output}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {!disabled && (
+          <div className="flex items-center gap-2">
+            <span className="text-[#6A9955]">$</span>
+            <div className="relative flex-1">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="w-full bg-transparent text-[#D4D4D4] outline-none caret-transparent"
+                spellCheck={false}
+                autoComplete="off"
+              />
+              <motion.span
+                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-4.5 bg-[#D4D4D4]/80"
+                style={{ left: `${input.length * 0.6}em` }}
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.53, repeat: Infinity, repeatType: 'reverse' }}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
