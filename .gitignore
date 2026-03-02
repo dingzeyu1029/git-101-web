@@ -29,6 +29,7 @@ CLAUDE.md
 
 # Playwright
 .playwright/
+.playwright-mcp/
 
 # Environment
 .env
