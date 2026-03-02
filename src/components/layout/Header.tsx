@@ -29,10 +29,10 @@ export default function Header() {
           </>
         ) : (
           <>
-            <Link to="/" className="flex items-center gap-2.5 text-text-primary font-semibold text-sm no-underline tracking-tight">
+            <div className="flex items-center gap-2.5 text-text-primary font-semibold text-sm tracking-tight">
               <GitBranch size={18} className="text-text-muted" />
               <span>Git 101</span>
-            </Link>
+            </div>
             <div className="flex-1" />
             <GitHubStarBadge />
           </>

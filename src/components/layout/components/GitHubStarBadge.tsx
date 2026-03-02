@@ -37,7 +37,7 @@ export default function GitHubStarBadge() {
       className="flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary no-underline transition-colors"
     >
       <Github size={18} />
-      {stars !== null && (
+      {stars !== null && stars > 0 && (
         <>
           <Star size={13} fill="currentColor" />
           <span className="text-xs font-medium">{stars}</span>
