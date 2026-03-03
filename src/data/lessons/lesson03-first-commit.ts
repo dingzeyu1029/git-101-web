@@ -113,6 +113,7 @@ export default {
       type: 'reading',
       id: 'git-diff',
       title: 'Viewing Changes with git diff',
+      visualization: 'diff-walkthrough',
       content: [
         {
           type: 'text',

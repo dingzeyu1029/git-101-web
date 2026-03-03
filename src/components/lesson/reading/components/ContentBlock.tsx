@@ -22,8 +22,8 @@ export default function ContentBlock({ block }: ContentBlockProps) {
       )
     case 'code':
       return (
-        <pre className="bg-[#1a1a2e] rounded-xl px-5 py-4 overflow-x-auto font-mono text-xs leading-relaxed">
-          <code className="text-[#e2e8f0]">{block.value}</code>
+        <pre className="bg-code-bg rounded-xl px-5 py-4 overflow-x-auto font-mono text-xs leading-relaxed">
+          <code className="text-code-text">{block.value}</code>
         </pre>
       )
     default: {

@@ -4,9 +4,9 @@ import { FileText, ArrowRight } from 'lucide-react'
 type ZoneId = 'working' | 'staging' | 'repo'
 
 const ZONES: { id: ZoneId; label: string; color: string }[] = [
-  { id: 'working', label: 'Working Directory', color: '#EF4444' },
-  { id: 'staging', label: 'Staging Area', color: '#D97706' },
-  { id: 'repo', label: 'Repository', color: '#10B981' },
+  { id: 'working', label: 'Working Directory', color: 'var(--color-accent-red)' },
+  { id: 'staging', label: 'Staging Area', color: 'var(--color-accent-yellow)' },
+  { id: 'repo', label: 'Repository', color: 'var(--color-accent-green)' },
 ]
 
 const STAGES: { files: Record<ZoneId, string[]> }[] = [
@@ -64,7 +64,7 @@ export default function ThreePlaceModel() {
                   key={file}
                   className="flex items-center gap-1.5 px-2 py-1 rounded text-xs font-mono"
                   style={{
-                    backgroundColor: `${zone.color}10`,
+                    backgroundColor: `color-mix(in srgb, ${zone.color} 6%, transparent)`,
                     color: zone.color,
                   }}
                 >

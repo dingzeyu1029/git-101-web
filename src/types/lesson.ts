@@ -13,12 +13,20 @@ export type CodeBlock = {
 
 export type ContentBlock = TextBlock | CodeBlock
 
+type VisualizationType =
+  | 'three-place-model'
+  | 'git-graph'
+  | 'conflict-markers'
+  | 'diff-walkthrough'
+  | 'reset-walkthrough'
+  | 'restore-walkthrough'
+
 export type ReadingStep = {
   type: 'reading'
   id: string
   title?: string
   content: ContentBlock[]
-  visualization?: string
+  visualization?: VisualizationType
   visualizationVariant?: ScenarioKey
 }
 

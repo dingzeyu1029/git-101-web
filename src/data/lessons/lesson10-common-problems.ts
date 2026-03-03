@@ -58,6 +58,7 @@ export default {
       type: 'reading',
       id: 'restore-unstage',
       title: 'Unstaging and Restoring Files',
+      visualization: 'restore-walkthrough',
       content: [
         {
           type: 'text',
@@ -171,6 +172,7 @@ export default {
       type: 'reading',
       id: 'reset-modes',
       title: 'Understanding git reset',
+      visualization: 'reset-walkthrough',
       content: [
         {
           type: 'text',

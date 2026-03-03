@@ -81,27 +81,27 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
 
   return (
     <div
-      className={`bg-[#1E1E1E] rounded-lg border border-[#333] overflow-hidden font-mono text-sm flex flex-col ${className || ''}`}
+      className={`bg-terminal-bg rounded-lg border border-terminal-border overflow-hidden font-mono text-sm flex flex-col ${className || ''}`}
     >
       {/* Terminal Buttons */}
-      <div className="flex flex-row items-center gap-2 p-2 bg-[#2D2D2D] border-b border-[#333] shrink-0">
+      <div className="flex flex-row items-center gap-2 p-2 bg-terminal-bar border-b border-terminal-border shrink-0">
         <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
         <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
         <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-        <span className="ml-2 text-[#888] text-sm">terminal</span>
+        <span className="ml-2 text-terminal-muted text-sm">terminal</span>
       </div>
 
       <div ref={terminalRef} className="p-4 h-64 overflow-y-auto space-y-1">
         {history.map((entry) => (
           <div key={entry.id}>
             <div className="flex items-center gap-2">
-              <span className="text-[#6A9955]">$</span>
-              <span className="text-[#D4D4D4]">{entry.command}</span>
+              <span className="text-terminal-prompt">$</span>
+              <span className="text-terminal-text">{entry.command}</span>
             </div>
             {entry.output && (
               <div
                 className={`ml-4 mt-0.5 whitespace-pre-wrap ${
-                  entry.type === 'success' ? 'text-[#999]' : 'text-[#F44747]'
+                  entry.type === 'success' ? 'text-terminal-muted' : 'text-terminal-error'
                 }`}
               >
                 {entry.output}
@@ -112,7 +112,7 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
 
         {!disabled && (
           <div className="flex items-center gap-2">
-            <span className="text-[#6A9955]">$</span>
+            <span className="text-terminal-prompt">$</span>
             <div className="relative flex-1">
               <input
                 ref={inputRef}
@@ -120,12 +120,12 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="w-full bg-transparent text-[#D4D4D4] outline-none caret-transparent"
+                className="w-full bg-transparent text-terminal-text outline-none caret-transparent"
                 spellCheck={false}
                 autoComplete="off"
               />
               <motion.span
-                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-4.5 bg-[#D4D4D4]/80"
+                className="absolute top-1/2 -translate-y-1/2 w-1.5 h-4.5 bg-terminal-text/80"
                 style={{ left: `${input.length * 0.6}em` }}
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.53, repeat: Infinity, repeatType: 'reverse' }}

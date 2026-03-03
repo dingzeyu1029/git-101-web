@@ -25,6 +25,7 @@ export default {
       type: 'reading',
       id: 'conflict-markers',
       title: 'Reading Conflict Markers',
+      visualization: 'conflict-markers',
       content: [
         {
           type: 'text',
