@@ -57,7 +57,7 @@ export default function CodeWalkthrough({
           return (
             <div
               key={i}
-              className={`px-2 py-[3px] ${line ? lineStyles[line.kind] ?? "" : ""}`}
+              className={`px-2 py-0.75 ${line ? lineStyles[line.kind] ?? "" : ""}`}
             >
               {line?.text || "\u00A0"}
             </div>
