@@ -7,8 +7,15 @@ export default function App() {
   return (
     <LessonNavProvider>
       <div className="min-h-screen w-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100]
+            focus:px-4 focus:py-2 focus:rounded-lg focus:bg-text-primary focus:text-white focus:text-sm focus:font-medium focus:no-underline"
+        >
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-1 w-full flex flex-col">
+        <main id="main-content" className="flex-1 w-full flex flex-col">
           <Outlet />
         </main>
         <LessonFooter />

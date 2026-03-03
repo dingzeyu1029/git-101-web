@@ -57,6 +57,7 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
       width={svgWidth}
       height={svgHeight}
       className="mx-auto"
+      aria-hidden="true"
     >
       {/* Layer 1: Connections */}
       <AnimatePresence>

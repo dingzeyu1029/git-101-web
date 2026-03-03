@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { ArrowRight, Home, CheckCircle } from 'lucide-react'
 import type { Step } from '../../types'
 import useProgressStore from '../../stores/progressStore'
@@ -23,7 +23,6 @@ function extractCommands(steps: readonly Step[]): string[] {
 
 export default function SummaryPage() {
   const { lessonId } = useParams()
-  const navigate = useNavigate()
   const parsedId = parseInt(lessonId ?? '', 10)
 
   const completeLesson = useProgressStore((s) => s.completeLesson)
@@ -46,7 +45,7 @@ export default function SummaryPage() {
     return (
       <div className="w-full max-w-2xl mx-auto px-6 sm:px-8 py-20 text-center">
         <h2 className="text-xl font-semibold text-text-primary mb-3">Lesson Not Found</h2>
-        <Link to="/" className="text-text-muted hover:text-text-primary underline text-sm">
+        <Link to="/" className="text-text-muted hover:text-text-primary underline text-sm rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary">
           Back to lessons
         </Link>
       </div>
@@ -94,7 +93,7 @@ export default function SummaryPage() {
         </Button>
 
         {nextLesson && (
-          <Button variant="filled" onClick={() => void navigate(`/lesson/${nextLesson.id}`)}>
+          <Button as={Link} variant="filled" to={`/lesson/${nextLesson.id}`}>
             Next Lesson
             <ArrowRight size={14} />
           </Button>
