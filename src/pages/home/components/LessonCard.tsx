@@ -10,7 +10,7 @@ interface LessonCardProps {
 
 export default function LessonCard({ lesson, isCompleted, isCurrent }: LessonCardProps) {
   return (
-    <Link to={`/lesson/${lesson.id}`} className="no-underline block">
+    <Link to={`/lesson/${lesson.id}`} className="no-underline block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary">
       <div
         className={`
           flex items-center gap-4 px-5 py-4 rounded-xl border transition-all duration-150

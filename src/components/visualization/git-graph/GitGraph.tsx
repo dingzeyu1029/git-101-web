@@ -68,6 +68,7 @@ export default function GitGraph({ scenario = 'branching' }: GitGraphProps) {
           className="p-1.5 rounded-md border border-border text-text-secondary
             enabled:hover:bg-bg-card enabled:cursor-pointer
             disabled:opacity-30 disabled:cursor-not-allowed
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary
             transition-colors"
         >
           <ChevronLeft size={16} />
@@ -82,6 +83,7 @@ export default function GitGraph({ scenario = 'branching' }: GitGraphProps) {
           className="p-1.5 rounded-md border border-border text-text-secondary
             enabled:hover:bg-bg-card enabled:cursor-pointer
             disabled:opacity-30 disabled:cursor-not-allowed
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary
             transition-colors"
         >
           <ChevronRight size={16} />

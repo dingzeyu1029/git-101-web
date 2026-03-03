@@ -14,7 +14,8 @@ export default function Header() {
           <>
             <Link
               to="/"
-              className="flex items-center gap-1 text-sm text-text-muted hover:text-text-primary no-underline shrink-0"
+              className="flex items-center gap-1 text-sm text-text-muted hover:text-text-primary no-underline shrink-0
+                rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
             >
               <ArrowLeft size={14} />
               Back

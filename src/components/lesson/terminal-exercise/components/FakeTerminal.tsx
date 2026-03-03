@@ -81,7 +81,8 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
 
   return (
     <div
-      className={`bg-terminal-bg rounded-lg border border-terminal-border overflow-hidden font-mono text-sm flex flex-col ${className || ''}`}
+      className={`bg-terminal-bg rounded-lg border border-terminal-border overflow-hidden font-mono text-sm flex flex-col
+        focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-terminal-text ${className || ''}`}
     >
       {/* Terminal Buttons */}
       <div className="flex flex-row items-center gap-2 p-2 bg-terminal-bar border-b border-terminal-border shrink-0">

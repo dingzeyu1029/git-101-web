@@ -43,7 +43,8 @@ export default function ThreePlaceModel() {
         <span className="text-xs font-medium text-text-muted uppercase tracking-wide">Git's Three Areas</span>
         <button
           onClick={reset}
-          className="text-xs text-text-muted hover:text-text-secondary cursor-pointer"
+          className="text-xs text-text-muted hover:text-text-secondary cursor-pointer
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary rounded"
         >
           Reset
         </button>
@@ -87,7 +88,8 @@ export default function ThreePlaceModel() {
         <button
           key={`cmd-${stage}`}
           onClick={advance}
-          className="w-full py-2 bg-bg-secondary hover:bg-bg-card border border-border rounded-lg text-sm font-mono text-text-primary cursor-pointer transition-colors"
+          className="w-full py-2 bg-bg-secondary hover:bg-bg-card border border-border rounded-lg text-sm font-mono text-text-primary cursor-pointer transition-colors
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
         >
           $ {COMMANDS[stage]}
         </button>

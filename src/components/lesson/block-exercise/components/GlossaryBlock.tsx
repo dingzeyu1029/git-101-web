@@ -25,7 +25,9 @@ export default function GlossaryBlock({ block, isUsed, onAdd, disabled }: Glossa
     <button
       ref={ref}
       onClick={onAdd}
-      className="px-4 py-2 rounded-lg font-mono text-sm bg-bg-card border border-border text-text-primary cursor-grab active:cursor-grabbing select-none transition-colors hover:border-text-muted"
+      aria-label={`Add ${block} to answer`}
+      className="px-4 py-2 rounded-lg font-mono text-sm bg-bg-card border border-border text-text-primary cursor-grab active:cursor-grabbing select-none transition-colors hover:border-text-muted
+        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
       disabled={disabled}
     >
       {block}

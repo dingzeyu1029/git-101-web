@@ -22,6 +22,16 @@ export default function CodeWalkthrough({
   const atStart = stageIndex === 0;
   const atEnd = stageIndex === stages.length - 1;
 
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "ArrowLeft" && !atStart) {
+      e.preventDefault();
+      setStageIndex((s) => s - 1);
+    } else if (e.key === "ArrowRight" && !atEnd) {
+      e.preventDefault();
+      setStageIndex((s) => s + 1);
+    }
+  }
+
   if (!stage) return null;
 
   const statusDisplay = stage.command ? (
@@ -55,7 +65,7 @@ export default function CodeWalkthrough({
         })}
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2" onKeyDown={handleKeyDown}>
         <button
           onClick={() => setStageIndex((s) => Math.max(s - 1, 0))}
           disabled={atStart}
@@ -63,6 +73,7 @@ export default function CodeWalkthrough({
           className="p-1.5 rounded-md border border-border text-text-secondary
             enabled:hover:bg-bg-card enabled:cursor-pointer
             disabled:opacity-30 disabled:cursor-not-allowed
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary
             transition-colors"
         >
           <ChevronLeft size={16} />
@@ -79,6 +90,7 @@ export default function CodeWalkthrough({
           className="p-1.5 rounded-md border border-border text-text-secondary
             enabled:hover:bg-bg-card enabled:cursor-pointer
             disabled:opacity-30 disabled:cursor-not-allowed
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary
             transition-colors"
         >
           <ChevronRight size={16} />

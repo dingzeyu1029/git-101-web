@@ -27,8 +27,12 @@ export default function SortableBlock({ id, index, children, onRemove, disabled 
     <div
       ref={ref}
       data-block
+      role="button"
+      tabIndex={0}
       onClick={onRemove}
-      className="px-4 py-2 rounded-lg font-mono text-sm bg-text-primary text-white cursor-grab active:cursor-grabbing select-none"
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onRemove() } }}
+      className="px-4 py-2 rounded-lg font-mono text-sm bg-text-primary text-white cursor-grab active:cursor-grabbing select-none
+        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
       {children}
     </div>
