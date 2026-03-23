@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { GitBranch, ArrowLeft } from 'lucide-react'
+import { GitBranch, ArrowLeft, ScrollText } from 'lucide-react'
 import { useLessonNav } from '../../hooks/useLessonNav'
 import ProgressBar from './components/ProgressBar'
 import GitHubStarBadge from './components/GitHubStarBadge'
@@ -25,8 +25,17 @@ export default function Header() {
                 <ProgressBar current={current} total={total} />
               </div>
             </div>
-            {/* Spacer to balance the back button */}
-            <div className="w-13 shrink-0" />
+            <a
+              href="/cheatsheet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-xs text-text-muted hover:text-text-primary no-underline shrink-0
+                rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
+              title="Cheat Sheet"
+            >
+              <ScrollText size={14} />
+              <span className="hidden sm:inline">Cheat Sheet</span>
+            </a>
           </>
         ) : (
           <>

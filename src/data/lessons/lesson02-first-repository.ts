@@ -3,6 +3,7 @@ export default {
   id: 2,
   title: 'Your First Repository',
   description: 'Initialize a repo and understand file states',
+
   steps: [
     {
       type: 'reading',
@@ -123,6 +124,11 @@ export default {
           type: 'text',
           value:
             'The GUI is convenient, but it\'s best to **learn the command line first**. The CLI works everywhere (servers, other editors, automated tools), and understanding the commands helps you know what the GUI is actually doing. Once you\'re comfortable with the commands, feel free to use whichever interface you prefer.',
+        },
+        {
+          type: 'text',
+          value:
+            "As you learn new commands, you can use the **Cheat Sheet** button in the top-right corner to quickly look them up. It tracks what you've learned so far.",
         },
       ],
     },

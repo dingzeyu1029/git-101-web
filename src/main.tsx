@@ -6,6 +6,7 @@ import App from './App'
 import HomePage from './pages/home/HomePage'
 import LessonPage from './pages/lesson/LessonPage'
 import SummaryPage from './pages/summary/SummaryPage'
+import CheatsheetPage from './pages/cheatsheet/CheatsheetPage'
 
 const router = createBrowserRouter(
   [
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
         { index: true, element: <HomePage /> },
         { path: 'lesson/:lessonId', element: <LessonPage /> },
         { path: 'lesson/:lessonId/summary', element: <SummaryPage /> },
+        { path: 'cheatsheet', element: <CheatsheetPage /> },
       ],
     },
   ],
