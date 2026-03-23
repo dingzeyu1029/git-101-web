@@ -5,6 +5,7 @@ import ExerciseControls from '../ExerciseControls'
 import useProgressStore from '../../../stores/progressStore'
 import useExerciseNav from '../../../hooks/useExerciseNav'
 import { useLessonNav } from '../../../hooks/useLessonNav'
+import getCommandFeedback from '../../../utils/commandDiff'
 
 function normalizeCommand(cmd: string): string {
   return cmd.trim().replace(/\s+/g, ' ').toLowerCase()
@@ -54,6 +55,11 @@ export default function TerminalExercise({ step, lessonId }: TerminalExercisePro
       setSolved(true)
       completeStep(lessonId, step.id)
       return { correct: true }
+    }
+
+    const diffFeedback = getCommandFeedback(command, step.expectedCommand, step.acceptableVariants)
+    if (diffFeedback) {
+      return { correct: false, hint: diffFeedback }
     }
 
     const hint = step.hints?.[Math.min(hintIndex, step.hints.length - 1)]
