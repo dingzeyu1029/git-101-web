@@ -42,24 +42,27 @@ export default function getCommandFeedback(
     return `The right subcommand is \`git ${expectedSub}\`, not \`git ${actualSub}\`.`
   }
 
-  for (const aToken of actualTokens) {
-    if (aToken.startsWith('-') && !aToken.startsWith('--')) {
-      const doubleDash = '-' + aToken
-      if (expectedTokens.includes(doubleDash)) {
-        return `Use \`${doubleDash}\` (two dashes), not \`${aToken}\`.`
+  const actualFlags = actualTokens.filter((t) => t.startsWith('-'))
+  const expectedFlags = expectedTokens.filter((t) => t.startsWith('-'))
+
+  for (const flag of actualFlags) {
+    if (!flag.startsWith('--') && flag.length > 1) {
+      const doubleDash = '-' + flag
+      if (expectedFlags.includes(doubleDash)) {
+        return `Use \`${doubleDash}\` (two dashes), not \`${flag}\`.`
       }
     }
   }
 
-  for (const token of expectedTokens) {
-    if (token.startsWith('-') && !actualTokens.includes(token)) {
-      return `You're missing the \`${token}\` flag.`
+  for (const flag of expectedFlags) {
+    if (!actualFlags.includes(flag)) {
+      return `You're missing the \`${flag}\` flag.`
     }
   }
 
-  for (const token of actualTokens) {
-    if (token.startsWith('-') && !expectedTokens.includes(token)) {
-      return `The \`${token}\` flag is not needed here.`
+  for (const flag of actualFlags) {
+    if (!expectedFlags.includes(flag)) {
+      return `The \`${flag}\` flag is not needed here.`
     }
   }
 

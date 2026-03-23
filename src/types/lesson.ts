@@ -102,6 +102,7 @@ export type WorkflowExerciseStep = {
   title: string
   scenario: string
   steps: WorkflowSubStep[]
+  completionMessage?: string
 }
 
 export type Step = ReadingStep | QuizStep | TerminalExerciseStep | BlockExerciseStep | ScenarioExerciseStep | ConflictExerciseStep | WorkflowExerciseStep
@@ -110,6 +111,5 @@ export type Lesson = {
   id: number
   title: string
   description: string
-  narrative?: string
   steps: readonly Step[]
 }

@@ -25,8 +25,8 @@ export default function Header() {
                 <ProgressBar current={current} total={total} />
               </div>
             </div>
-            <a
-              href="/cheatsheet"
+            <Link
+              to="/cheatsheet"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-xs text-text-muted hover:text-text-primary no-underline shrink-0
@@ -35,7 +35,7 @@ export default function Header() {
             >
               <ScrollText size={14} />
               <span className="hidden sm:inline">Cheat Sheet</span>
-            </a>
+            </Link>
           </>
         ) : (
           <>

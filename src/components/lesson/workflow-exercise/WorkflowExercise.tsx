@@ -46,7 +46,6 @@ export default function WorkflowExercise({ step, lessonId }: WorkflowExercisePro
     const result = handleSubmit(command)
     if (result.correct) {
       setShowHint(false)
-      setResetKey((k) => k + 1)
     }
     return result
   }
@@ -66,10 +65,11 @@ export default function WorkflowExercise({ step, lessonId }: WorkflowExercisePro
 
       <p className="text-sm text-text-secondary leading-relaxed">{step.scenario}</p>
 
+      {/* eslint-disable react-x/no-array-index-key -- static lesson data, order never changes */}
       <div className="flex items-center gap-2">
         {step.steps.map((s, i) => (
           <div
-            key={s.expectedCommand}
+            key={`bar-${i}`}
             className={`h-1.5 flex-1 rounded-full transition-colors ${
               completedSubSteps[i]
                 ? 'bg-accent-green'
@@ -83,8 +83,8 @@ export default function WorkflowExercise({ step, lessonId }: WorkflowExercisePro
 
       {step.steps.map(
         (substep, i) =>
-          i < currentSubStep && (
-            <div key={substep.expectedCommand} className="flex items-start gap-2 text-sm">
+          completedSubSteps[i] && (i !== currentSubStep || allCompleted) && (
+            <div key={`done-${i}`} className="flex items-start gap-2 text-sm">
               <CheckCircle size={14} className="text-accent-green shrink-0 mt-0.5" />
               <div>
                 <code className="font-mono text-xs text-text-primary">{substep.expectedCommand}</code>
@@ -95,13 +95,14 @@ export default function WorkflowExercise({ step, lessonId }: WorkflowExercisePro
             </div>
           )
       )}
+      {/* eslint-enable react-x/no-array-index-key */}
 
       {!allCompleted && activeSubStep && (
         <>
           <p className="text-sm text-text-secondary leading-relaxed">{activeSubStep.narration}</p>
 
           <FakeTerminal
-            key={resetKey}
+            key={`${currentSubStep}-${resetKey}`}
             ref={terminalRef}
             onSubmit={handleTerminalSubmit}
             successOutput={activeSubStep.successOutput}
@@ -125,7 +126,7 @@ export default function WorkflowExercise({ step, lessonId }: WorkflowExercisePro
         <div className="flex items-start gap-3 p-4 rounded-xl text-sm leading-relaxed bg-accent-green/5 border border-accent-green/20">
           <CheckCircle size={18} className="text-accent-green shrink-0" />
           <p className="text-text-secondary">
-            Workflow complete! You've practiced the full feature branch workflow.
+            {step.completionMessage ?? 'Workflow complete!'}
           </p>
         </div>
       )}

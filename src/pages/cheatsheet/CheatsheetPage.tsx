@@ -3,7 +3,7 @@ import useProgressStore from '../../stores/progressStore'
 import cheatsheet from '../../data/cheatsheet'
 
 export default function CheatsheetPage() {
-  const isLessonCompleted = useProgressStore((s) => s.isLessonCompleted)
+  const completedLessons = useProgressStore((s) => s.completedLessons)
 
   return (
     <div className="w-full max-w-2xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
@@ -24,7 +24,7 @@ export default function CheatsheetPage() {
             </h2>
             <div className="flex flex-col gap-1">
               {category.commands.map((cmd) => {
-                const learned = isLessonCompleted(cmd.lessonId)
+                const learned = completedLessons.includes(cmd.lessonId)
 
                 return (
                   <div

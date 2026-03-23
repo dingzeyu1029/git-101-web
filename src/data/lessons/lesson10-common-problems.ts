@@ -331,6 +331,10 @@ export default {
         },
       ],
       explanation: 'On shared branches, always use git revert. It safely undoes changes by creating a new commit, preserving history for everyone.',
+      hints: [
+        'The commit is already pushed — you need a command that does not rewrite shared history',
+        'Think about which command creates a new commit to undo changes',
+      ],
     },
     {
       type: 'scenario-exercise',
@@ -359,6 +363,10 @@ export default {
         },
       ],
       explanation: 'The two-step pattern — create a branch at the current point, then reset the original branch back — is the standard way to move commits to a new branch. Since nothing was pushed, resetting main is safe.',
+      hints: [
+        'You need to both create the new branch AND move main back — a single command won\'t do it',
+        'Creating a branch at the current commit preserves the commits on that branch',
+      ],
     },
   ],
 } satisfies Lesson

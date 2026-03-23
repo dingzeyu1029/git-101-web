@@ -82,6 +82,7 @@ export default {
           ],
         },
       ],
+      completionMessage: "You've practiced the full feature branch workflow — pull, branch, stage, commit, push.",
     },
     {
       type: 'reading',

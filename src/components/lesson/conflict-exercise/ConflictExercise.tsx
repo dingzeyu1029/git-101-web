@@ -28,7 +28,14 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
   const completeStep = useProgressStore((s) => s.completeStep)
   const isCompleted = useProgressStore((s) => !!s.completedSteps[`${lessonId}:${step.id}`])
 
-  const [resolution, setResolution] = useState<Resolution | null>(null)
+  const [resolution, setResolution] = useState<Resolution | null>(() => {
+    if (!isCompleted) return null
+    const first = step.acceptableResolutions[0]?.trim()
+    if (first === step.oursContent.trim()) return 'ours'
+    if (first === step.theirsContent.trim()) return 'theirs'
+    if (first === (step.oursContent + '\n' + step.theirsContent).trim()) return 'both'
+    return 'theirs'
+  })
   const [shake, setShake] = useState(false)
   const [hintIndex, setHintIndex] = useState(0)
   const [showHint, setShowHint] = useState(false)
@@ -42,6 +49,7 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
       return true
     }
     setShake(true)
+    setHintIndex((prev) => Math.min(prev + 1, (step.hints?.length ?? 1) - 1))
     setTimeout(() => setShake(false), 600)
     return false
   }
@@ -54,12 +62,7 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
   }
 
   function handleToggleHint() {
-    if (showHint) {
-      setShowHint(false)
-    } else {
-      setShowHint(true)
-      setHintIndex((prev) => Math.min(prev + 1, (step.hints?.length ?? 1) - 1))
-    }
+    setShowHint((prev) => !prev)
   }
 
   useExerciseNav({ solved: isCompleted, checkFn: handleCheck, checkDisabled: resolution === null })
@@ -97,7 +100,7 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
         transition={{ duration: 0.4 }}
       >
         {buttons.map(({ key, label, preview, activeColor }) => {
-          let styles = 'border-border bg-white'
+          let styles = 'border-border bg-bg-card'
           if (isCompleted && resolution === key) {
             styles = activeColor
           } else if (!isCompleted && resolution === key) {

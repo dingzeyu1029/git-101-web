@@ -40,7 +40,7 @@ export default function QuizStep({ step, lessonId }: QuizStepProps) {
         transition={{ duration: 0.4 }}
       >
         {step.options.map((option, i) => {
-          let styles = 'border-border bg-white'
+          let styles = 'border-border bg-bg-card'
 
           if (isCompleted && i === step.correctIndex) {
             styles = 'border-accent-green bg-accent-green/5'

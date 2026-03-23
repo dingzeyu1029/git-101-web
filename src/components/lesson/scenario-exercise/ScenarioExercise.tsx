@@ -4,6 +4,7 @@ import { CheckCircle } from 'lucide-react'
 import type { ScenarioExerciseStep } from '../../../types'
 import useProgressStore from '../../../stores/progressStore'
 import useExerciseNav from '../../../hooks/useExerciseNav'
+import ExerciseControls from '../ExerciseControls'
 
 interface ScenarioExerciseProps {
   step: ScenarioExerciseStep
@@ -15,8 +16,12 @@ export default function ScenarioExercise({ step, lessonId }: ScenarioExercisePro
   const isCompleted = useProgressStore((s) => !!s.completedSteps[`${lessonId}:${step.id}`])
 
   const correctIndex = step.options.findIndex((o) => o.isCorrect)
-  const [selected, setSelected] = useState<number | null>(isCompleted ? correctIndex : null)
+  const [selected, setSelected] = useState<number | null>(
+    isCompleted && correctIndex !== -1 ? correctIndex : null
+  )
   const [shake, setShake] = useState(false)
+  const [hintIndex, setHintIndex] = useState(0)
+  const [showHint, setShowHint] = useState(false)
 
   function handleCheck() {
     const option = selected !== null ? step.options[selected] : undefined
@@ -26,8 +31,20 @@ export default function ScenarioExercise({ step, lessonId }: ScenarioExercisePro
       return true
     }
     setShake(true)
+    setHintIndex((prev) => Math.min(prev + 1, (step.hints?.length ?? 1) - 1))
     setTimeout(() => setShake(false), 600)
     return false
+  }
+
+  function handleReset() {
+    setSelected(null)
+    setShake(false)
+    setHintIndex(0)
+    setShowHint(false)
+  }
+
+  function handleToggleHint() {
+    setShowHint((prev) => !prev)
   }
 
   useExerciseNav({ solved: isCompleted, checkFn: handleCheck, checkDisabled: selected === null })
@@ -42,7 +59,7 @@ export default function ScenarioExercise({ step, lessonId }: ScenarioExercisePro
         transition={{ duration: 0.4 }}
       >
         {step.options.map((option, i) => {
-          let styles = 'border-border bg-white'
+          let styles = 'border-border bg-bg-card'
 
           if (isCompleted && option.isCorrect) {
             styles = 'border-accent-green bg-accent-green/5'
@@ -80,6 +97,15 @@ export default function ScenarioExercise({ step, lessonId }: ScenarioExercisePro
           <p className="text-text-secondary">{step.explanation}</p>
         </div>
       )}
+
+      <ExerciseControls
+        hints={step.hints}
+        hintIndex={hintIndex}
+        showHint={showHint}
+        solved={isCompleted}
+        onToggleHint={handleToggleHint}
+        onReset={handleReset}
+      />
     </div>
   )
 }

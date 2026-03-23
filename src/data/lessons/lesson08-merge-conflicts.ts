@@ -180,6 +180,10 @@ export default {
         },
       ],
       explanation: 'git merge --abort is the safest escape hatch during a conflict. It cleanly undoes the merge attempt without risking any data loss.',
+      hints: [
+        'You want to undo the merge entirely, not just fix the files',
+        'Look for the command specifically designed to cancel an in-progress merge',
+      ],
     },
   ],
 } satisfies Lesson
