@@ -92,6 +92,41 @@ export default {
       ],
     },
     {
+      type: 'conflict-exercise',
+      id: 'resolve-conflict-1',
+      prompt: 'Resolve this merge conflict. The team decided to use the updated welcome message from the feature branch:',
+      fileName: 'index.html',
+      oursLabel: 'HEAD (main)',
+      theirsLabel: 'feature-banner',
+      oursContent: 'Welcome to our website!',
+      theirsContent: 'Welcome to our amazing website!',
+      surroundingBefore: '<body>\n  <header>',
+      surroundingAfter: '  </header>\n</body>',
+      acceptableResolutions: ['Welcome to our amazing website!'],
+      hints: [
+        'The team wants the feature branch version',
+        'Click "Keep Theirs" to use the incoming changes',
+      ],
+    },
+    {
+      type: 'conflict-exercise',
+      id: 'resolve-conflict-2',
+      prompt: 'Both developers added valid CSS imports. Resolve this conflict by keeping both lines:',
+      fileName: 'styles.css',
+      oursLabel: 'HEAD (main)',
+      theirsLabel: 'feature-dark-mode',
+      oursContent: '@import "components.css";',
+      theirsContent: '@import "dark-theme.css";',
+      acceptableResolutions: [
+        '@import "components.css";\n@import "dark-theme.css";',
+        '@import "dark-theme.css";\n@import "components.css";',
+      ],
+      hints: [
+        'Both imports are needed — the project uses components and dark mode',
+        'Click "Keep Both" to include both lines',
+      ],
+    },
+    {
       type: 'terminal-exercise',
       id: 'stage-resolved',
       prompt:
