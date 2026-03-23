@@ -28,6 +28,62 @@ export default {
       ],
     },
     {
+      type: 'workflow-exercise',
+      id: 'feature-branch-workflow-practice',
+      title: 'Practice: Feature Branch Workflow',
+      scenario:
+        'You are adding a search feature to a team project. Walk through the standard feature branch workflow step by step.',
+      steps: [
+        {
+          narration: 'First, make sure you are on the main branch and have the latest changes from the remote.',
+          expectedCommand: 'git pull origin main',
+          acceptableVariants: ['git pull'],
+          successOutput: 'Already up to date.',
+          hints: ['Pull the latest changes from the remote main branch'],
+        },
+        {
+          narration: 'Now create a new feature branch for your search feature and switch to it.',
+          expectedCommand: 'git switch -c feature/add-search',
+          acceptableVariants: ['git checkout -b feature/add-search'],
+          successOutput: "Switched to a new branch 'feature/add-search'",
+          hints: [
+            'Use git switch -c to create and switch in one step',
+            'The branch name should be feature/add-search',
+          ],
+        },
+        {
+          narration: 'You have implemented the search bar component. Stage all your changes.',
+          expectedCommand: 'git add .',
+          acceptableVariants: ['git add -A', 'git add --all'],
+          successOutput: '',
+          hints: ['Stage all changes with git add'],
+        },
+        {
+          narration: 'Commit your staged changes with a descriptive message.',
+          expectedCommand: 'git commit -m "feat: add search bar component"',
+          acceptableVariants: [
+            "git commit -m 'feat: add search bar component'",
+            'git commit -m "Add search bar component"',
+            "git commit -m 'Add search bar component'",
+          ],
+          successOutput:
+            '[feature/add-search a1b2c3d] feat: add search bar component\n 3 files changed, 42 insertions(+)',
+          hints: ['Use git commit -m with a message describing what you built'],
+        },
+        {
+          narration: 'Push your feature branch to the remote and set up tracking so future pushes are simpler.',
+          expectedCommand: 'git push -u origin feature/add-search',
+          acceptableVariants: ['git push --set-upstream origin feature/add-search'],
+          successOutput:
+            "Branch 'feature/add-search' set up to track remote branch 'feature/add-search' from 'origin'.",
+          hints: [
+            'Use -u flag to set up tracking',
+            'The remote is origin and branch is feature/add-search',
+          ],
+        },
+      ],
+    },
+    {
       type: 'reading',
       id: 'fork-workflow',
       title: 'The Fork Workflow',
