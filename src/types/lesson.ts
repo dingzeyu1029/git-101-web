@@ -58,11 +58,58 @@ export type BlockExerciseStep = {
   hints?: readonly string[]
 }
 
-export type Step = ReadingStep | QuizStep | TerminalExerciseStep | BlockExerciseStep
+export type ScenarioOption = {
+  command: string
+  consequence: string
+  isCorrect: boolean
+}
+
+export type ScenarioExerciseStep = {
+  type: 'scenario-exercise'
+  id: string
+  scenario: string
+  options: ScenarioOption[]
+  explanation: string
+  hints?: readonly string[]
+}
+
+export type ConflictExerciseStep = {
+  type: 'conflict-exercise'
+  id: string
+  prompt: string
+  fileName: string
+  oursLabel: string
+  theirsLabel: string
+  oursContent: string
+  theirsContent: string
+  surroundingBefore?: string
+  surroundingAfter?: string
+  acceptableResolutions: string[]
+  hints?: readonly string[]
+}
+
+export type WorkflowSubStep = {
+  narration: string
+  expectedCommand: string
+  acceptableVariants?: readonly string[]
+  successOutput: string
+  hints?: readonly string[]
+}
+
+export type WorkflowExerciseStep = {
+  type: 'workflow-exercise'
+  id: string
+  title: string
+  scenario: string
+  steps: WorkflowSubStep[]
+}
+
+export type Step = ReadingStep | QuizStep | TerminalExerciseStep | BlockExerciseStep | ScenarioExerciseStep | ConflictExerciseStep | WorkflowExerciseStep
 
 export type Lesson = {
   id: number
   title: string
   description: string
+  narrative?: string
   steps: readonly Step[]
 }

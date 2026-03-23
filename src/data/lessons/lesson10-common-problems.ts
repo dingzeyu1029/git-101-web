@@ -304,5 +304,61 @@ export default {
       explanation:
         'git revert creates a new commit that undoes the changes, preserving history. This is safe for shared branches because it does not rewrite history. git reset rewrites history and can cause problems for collaborators.',
     },
+    {
+      type: 'scenario-exercise',
+      id: 'scenario-undo-pushed',
+      scenario: 'You just pushed a commit to the shared main branch that accidentally deleted an important configuration file. Your teammates are actively pulling from main.',
+      options: [
+        {
+          command: 'git revert HEAD',
+          consequence: 'Creates a new commit that undoes the deletion. Your teammates see a clean history with the fix. The original mistake and its fix are both documented.',
+          isCorrect: true,
+        },
+        {
+          command: 'git reset --hard HEAD~1 && git push --force',
+          consequence: 'Rewrites the shared history. Teammates who already pulled now have divergent histories, leading to confusing merge conflicts and potentially lost work.',
+          isCorrect: false,
+        },
+        {
+          command: 'git restore config.json',
+          consequence: 'Restores the file in your working directory, but does not undo the commit. The bad commit is still in history and already pushed to the remote.',
+          isCorrect: false,
+        },
+        {
+          command: 'rm -rf .git && git init',
+          consequence: 'Destroys ALL Git history locally. You would lose every commit ever made and be completely out of sync with the remote. This is catastrophic.',
+          isCorrect: false,
+        },
+      ],
+      explanation: 'On shared branches, always use git revert. It safely undoes changes by creating a new commit, preserving history for everyone.',
+    },
+    {
+      type: 'scenario-exercise',
+      id: 'scenario-wrong-branch',
+      scenario: 'You just made three commits on main by accident. These commits should have been on a new feature branch called "add-search". Nothing has been pushed yet.',
+      options: [
+        {
+          command: 'git branch add-search && git reset --hard HEAD~3',
+          consequence: 'Creates a new branch at the current commit (preserving your 3 commits there), then moves main back 3 commits. Your work is safely on add-search.',
+          isCorrect: true,
+        },
+        {
+          command: 'git switch -c add-search',
+          consequence: 'Creates the new branch with your commits, but main still has them too. You would need to also reset main, which this command alone does not do.',
+          isCorrect: false,
+        },
+        {
+          command: 'git revert HEAD~3..HEAD',
+          consequence: 'Undoes the commits on main by adding 3 new revert commits, but your original work is not moved to a branch — it is just undone. You would have to redo it.',
+          isCorrect: false,
+        },
+        {
+          command: 'git stash && git switch -c add-search && git stash pop',
+          consequence: 'Stash only saves uncommitted changes. Since you already committed, stash has nothing to save. Your 3 commits stay on main.',
+          isCorrect: false,
+        },
+      ],
+      explanation: 'The two-step pattern — create a branch at the current point, then reset the original branch back — is the standard way to move commits to a new branch. Since nothing was pushed, resetting main is safe.',
+    },
   ],
 } satisfies Lesson

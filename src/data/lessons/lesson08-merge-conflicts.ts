@@ -118,5 +118,33 @@ export default {
       explanation:
         "The ======= marker is the divider between your current branch's version (above) and the incoming branch's version (below) within the conflict block.",
     },
+    {
+      type: 'scenario-exercise',
+      id: 'scenario-conflict-approach',
+      scenario: 'You started merging feature-login into main, but Git reports a conflict in auth.js. You\'re not confident about the changes and want to back out safely.',
+      options: [
+        {
+          command: 'git merge --abort',
+          consequence: 'The merge is canceled cleanly. Both branches remain exactly as they were. You can try again later when you\'re ready.',
+          isCorrect: true,
+        },
+        {
+          command: 'git reset --hard HEAD',
+          consequence: 'This resets to before the merge, but if you had any uncommitted changes in your working directory, they are permanently lost.',
+          isCorrect: false,
+        },
+        {
+          command: 'git checkout main',
+          consequence: 'Git refuses — you are in the middle of a merge. You must either resolve the conflicts or abort the merge first.',
+          isCorrect: false,
+        },
+        {
+          command: 'git stash',
+          consequence: 'Git refuses to stash during an active merge conflict. You must resolve or abort the merge first.',
+          isCorrect: false,
+        },
+      ],
+      explanation: 'git merge --abort is the safest escape hatch during a conflict. It cleanly undoes the merge attempt without risking any data loss.',
+    },
   ],
 } satisfies Lesson
