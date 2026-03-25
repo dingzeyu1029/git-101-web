@@ -34,7 +34,11 @@ export default function useWorkflowExercise(steps: readonly WorkflowSubStep[]): 
       const expected = normalizeCommand(current.expectedCommand)
       const variants = (current.acceptableVariants ?? []).map(normalizeCommand)
 
-      if (normalized === expected || variants.includes(normalized)) {
+      const prefixMatch = current.acceptPrefix
+        ? normalized.startsWith(normalizeCommand(current.acceptPrefix))
+        : false
+
+      if (normalized === expected || variants.includes(normalized) || prefixMatch) {
         setCompletedSubSteps((prev) => {
           const next = [...prev]
           next[currentSubStep] = true

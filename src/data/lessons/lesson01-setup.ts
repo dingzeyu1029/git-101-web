@@ -22,7 +22,7 @@ export default {
         {
           type: 'text',
           value:
-            '**macOS** — Git comes pre-installed on most Macs, but it\'s often outdated. The recommended way to install the latest version is through [Homebrew](https://brew.sh), the most popular package manager for macOS. If you don\'t have Homebrew yet, follow the [installation guide](https://brew.sh) first — it includes steps to add Homebrew to your PATH so your terminal can find it.',
+            '**macOS** — Git comes pre-installed on most Macs, but it\'s often outdated. The recommended way to install the latest version is through [Homebrew](https://brew.sh), the most popular package manager for macOS. If you don\'t have Homebrew yet, head to the [official website](https://brew.sh) for the installation guide.',
         },
         {
           type: 'code',

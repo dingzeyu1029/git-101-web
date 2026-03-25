@@ -154,36 +154,19 @@ export default {
         "The ======= marker is the divider between your current branch's version (above) and the incoming branch's version (below) within the conflict block.",
     },
     {
-      type: 'scenario-exercise',
-      id: 'scenario-conflict-approach',
-      scenario: 'You started merging feature-login into main, but Git reports a conflict in auth.js. You\'re not confident about the changes and want to back out safely.',
+      type: 'quiz',
+      id: 'quiz-abort-merge',
+      question:
+        'You started merging feature-login into main, but Git reports a conflict in auth.js. You\'re not confident about the changes and want to back out safely. What should you run?',
       options: [
-        {
-          command: 'git merge --abort',
-          consequence: 'The merge is canceled cleanly. Both branches remain exactly as they were. You can try again later when you\'re ready.',
-          isCorrect: true,
-        },
-        {
-          command: 'git reset --hard HEAD',
-          consequence: 'This resets to before the merge, but if you had any uncommitted changes in your working directory, they are permanently lost.',
-          isCorrect: false,
-        },
-        {
-          command: 'git checkout main',
-          consequence: 'Git refuses — you are in the middle of a merge. You must either resolve the conflicts or abort the merge first.',
-          isCorrect: false,
-        },
-        {
-          command: 'git stash',
-          consequence: 'Git refuses to stash during an active merge conflict. You must resolve or abort the merge first.',
-          isCorrect: false,
-        },
+        '`git merge --abort`',
+        '`git status`',
+        '`git add auth.js`',
+        '`git commit`',
       ],
-      explanation: 'git merge --abort is the safest escape hatch during a conflict. It cleanly undoes the merge attempt without risking any data loss.',
-      hints: [
-        'You want to undo the merge entirely, not just fix the files',
-        'Look for the command specifically designed to cancel an in-progress merge',
-      ],
+      correctIndex: 0,
+      explanation:
+        '`git merge --abort` cancels the merge cleanly and puts both branches back to exactly where they were before. You can try again later when you\'re ready.',
     },
   ],
 } satisfies Lesson

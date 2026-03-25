@@ -42,7 +42,7 @@ export default {
     {
       type: 'reading',
       id: 'merge-types',
-      title: 'Fast-Forward vs. 3-Way Merge',
+      title: 'Fast-Forward vs. Merge Commit',
       content: [
         {
           type: 'text',
@@ -103,7 +103,7 @@ export default {
     {
       type: 'quiz',
       id: 'quiz-merge-types',
-      question: 'When does Git perform a 3-way merge instead of a fast-forward?',
+      question: 'When does Git create a merge commit instead of a fast-forward?',
       options: [
         'When both branches have new commits since they diverged',
         'When the feature branch has no commits',
@@ -112,7 +112,7 @@ export default {
       ],
       correctIndex: 0,
       explanation:
-        'A 3-way merge is needed when both branches have diverged with new commits, so Git must create a merge commit to combine them.',
+        'A merge commit is needed when both branches have diverged with new commits, so Git creates a special commit that ties the two histories together.',
     },
   ],
 } satisfies Lesson

@@ -168,6 +168,11 @@ export default {
           value:
             'Then add your machine-specific patterns to `~/.gitignore_global`. This keeps your project\'s `.gitignore` focused on project-specific rules, and your personal preferences stay out of the shared repo.',
         },
+        {
+          type: 'text',
+          value:
+            'Want to see which files Git is actually ignoring? Add the `--ignored` flag to `git status`:\n\n`git status --ignored`\n\nThis is handy for verifying your `.gitignore` rules are working as expected.',
+        },
       ],
     },
     {

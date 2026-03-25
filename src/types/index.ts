@@ -6,8 +6,6 @@ export type {
   QuizStep,
   TerminalExerciseStep,
   BlockExerciseStep,
-  ScenarioOption,
-  ScenarioExerciseStep,
   ConflictExerciseStep,
   WorkflowSubStep,
   WorkflowExerciseStep,

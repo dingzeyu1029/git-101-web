@@ -58,21 +58,6 @@ export type BlockExerciseStep = {
   hints?: readonly string[]
 }
 
-export type ScenarioOption = {
-  command: string
-  consequence: string
-  isCorrect: boolean
-}
-
-export type ScenarioExerciseStep = {
-  type: 'scenario-exercise'
-  id: string
-  scenario: string
-  options: ScenarioOption[]
-  explanation: string
-  hints?: readonly string[]
-}
-
 export type ConflictExerciseStep = {
   type: 'conflict-exercise'
   id: string
@@ -92,6 +77,7 @@ export type WorkflowSubStep = {
   narration: string
   expectedCommand: string
   acceptableVariants?: readonly string[]
+  acceptPrefix?: string
   successOutput: string
   hints?: readonly string[]
 }
@@ -105,7 +91,7 @@ export type WorkflowExerciseStep = {
   completionMessage?: string
 }
 
-export type Step = ReadingStep | QuizStep | TerminalExerciseStep | BlockExerciseStep | ScenarioExerciseStep | ConflictExerciseStep | WorkflowExerciseStep
+export type Step = ReadingStep | QuizStep | TerminalExerciseStep | BlockExerciseStep | ConflictExerciseStep | WorkflowExerciseStep
 
 export type Lesson = {
   id: number

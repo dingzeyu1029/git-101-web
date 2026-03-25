@@ -42,7 +42,7 @@ export default {
           hints: ['Pull the latest changes from the remote main branch'],
         },
         {
-          narration: 'Now create a new feature branch for your search feature and switch to it.',
+          narration: 'Now create a branch called `feature/add-search` and switch to it.',
           expectedCommand: 'git switch -c feature/add-search',
           acceptableVariants: ['git checkout -b feature/add-search'],
           successOutput: "Switched to a new branch 'feature/add-search'",
@@ -59,19 +59,15 @@ export default {
           hints: ['Stage all changes with git add'],
         },
         {
-          narration: 'Commit your staged changes with a descriptive message.',
+          narration: 'Commit your staged changes with a descriptive message (e.g. `git commit -m "feat: add search bar"`).',
           expectedCommand: 'git commit -m "feat: add search bar component"',
-          acceptableVariants: [
-            "git commit -m 'feat: add search bar component'",
-            'git commit -m "Add search bar component"',
-            "git commit -m 'Add search bar component'",
-          ],
+          acceptPrefix: 'git commit -m',
           successOutput:
             '[feature/add-search a1b2c3d] feat: add search bar component\n 3 files changed, 42 insertions(+)',
           hints: ['Use git commit -m with a message describing what you built'],
         },
         {
-          narration: 'Push your feature branch to the remote and set up tracking so future pushes are simpler.',
+          narration: 'Push your branch to the remote with `git push -u origin feature/add-search`. The `-u` flag sets up tracking so future pushes are simpler.',
           expectedCommand: 'git push -u origin feature/add-search',
           acceptableVariants: ['git push --set-upstream origin feature/add-search'],
           successOutput:
@@ -271,7 +267,7 @@ export default {
     {
       type: 'terminal-exercise',
       id: 'push-feature-branch',
-      prompt: 'Push your feature branch to the remote and set up tracking:',
+      prompt: 'Push your feature/add-auth branch to the remote and set up tracking:',
       expectedCommand: 'git push -u origin feature/add-auth',
       acceptableVariants: [
         'git push --set-upstream origin feature/add-auth',

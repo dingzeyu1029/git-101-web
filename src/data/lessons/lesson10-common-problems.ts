@@ -305,68 +305,34 @@ export default {
         'git revert creates a new commit that undoes the changes, preserving history. This is safe for shared branches because it does not rewrite history. git reset rewrites history and can cause problems for collaborators.',
     },
     {
-      type: 'scenario-exercise',
-      id: 'scenario-undo-pushed',
-      scenario: 'You just pushed a commit to the shared main branch that accidentally deleted an important configuration file. Your teammates are actively pulling from main.',
+      type: 'quiz',
+      id: 'quiz-undo-pushed',
+      question:
+        'You just pushed a commit to the shared main branch that accidentally deleted an important config file. Your teammates are actively pulling from main. What\'s the safest way to undo it?',
       options: [
-        {
-          command: 'git revert HEAD',
-          consequence: 'Creates a new commit that undoes the deletion. Your teammates see a clean history with the fix. The original mistake and its fix are both documented.',
-          isCorrect: true,
-        },
-        {
-          command: 'git reset --hard HEAD~1 && git push --force',
-          consequence: 'Rewrites the shared history. Teammates who already pulled now have divergent histories, leading to confusing merge conflicts and potentially lost work.',
-          isCorrect: false,
-        },
-        {
-          command: 'git restore config.json',
-          consequence: 'Restores the file in your working directory, but does not undo the commit. The bad commit is still in history and already pushed to the remote.',
-          isCorrect: false,
-        },
-        {
-          command: 'rm -rf .git && git init',
-          consequence: 'Destroys ALL Git history locally. You would lose every commit ever made and be completely out of sync with the remote. This is catastrophic.',
-          isCorrect: false,
-        },
+        '`git revert HEAD`',
+        '`git reset --hard HEAD~1`',
+        '`git restore config.json`',
+        '`git commit --amend`',
       ],
-      explanation: 'On shared branches, always use git revert. It safely undoes changes by creating a new commit, preserving history for everyone.',
-      hints: [
-        'The commit is already pushed — you need a command that does not rewrite shared history',
-        'Think about which command creates a new commit to undo changes',
-      ],
+      correctIndex: 0,
+      explanation:
+        '`git revert HEAD` creates a new commit that undoes the deletion without rewriting history. Your teammates see the fix cleanly. `git reset` would rewrite shared history and cause problems for everyone who already pulled.',
     },
     {
-      type: 'scenario-exercise',
-      id: 'scenario-wrong-branch',
-      scenario: 'You just made three commits on main by accident. These commits should have been on a new feature branch called "add-search". Nothing has been pushed yet.',
+      type: 'quiz',
+      id: 'quiz-wrong-branch',
+      question:
+        'You accidentally made three commits on main. They should have been on a new branch called "add-search". Nothing has been pushed yet. What should you do?',
       options: [
-        {
-          command: 'git branch add-search && git reset --hard HEAD~3',
-          consequence: 'Creates a new branch at the current commit (preserving your 3 commits there), then moves main back 3 commits. Your work is safely on add-search.',
-          isCorrect: true,
-        },
-        {
-          command: 'git switch -c add-search',
-          consequence: 'Creates the new branch with your commits, but main still has them too. You would need to also reset main, which this command alone does not do.',
-          isCorrect: false,
-        },
-        {
-          command: 'git revert HEAD~3..HEAD',
-          consequence: 'Undoes the commits on main by adding 3 new revert commits, but your original work is not moved to a branch — it is just undone. You would have to redo it.',
-          isCorrect: false,
-        },
-        {
-          command: 'git stash && git switch -c add-search && git stash pop',
-          consequence: 'Stash only saves uncommitted changes. Since you already committed, stash has nothing to save. Your 3 commits stay on main.',
-          isCorrect: false,
-        },
+        'Create the branch first with `git branch add-search`, then reset main back with `git reset --hard HEAD~3`',
+        'Just run `git switch -c add-search`',
+        'Revert all three commits with `git revert`',
+        'Delete the commits with `git reset --hard HEAD~3` and start over',
       ],
-      explanation: 'The two-step pattern — create a branch at the current point, then reset the original branch back — is the standard way to move commits to a new branch. Since nothing was pushed, resetting main is safe.',
-      hints: [
-        'You need to both create the new branch AND move main back — a single command won\'t do it',
-        'Creating a branch at the current commit preserves the commits on that branch',
-      ],
+      correctIndex: 0,
+      explanation:
+        'Creating the branch first saves your commits on that branch. Then resetting main moves it back 3 commits. The two-step order matters — if you reset first, the commits are gone before the branch can keep them.',
     },
   ],
 } satisfies Lesson
