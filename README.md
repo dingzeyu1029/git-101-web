@@ -4,12 +4,12 @@ An interactive web app for learning Git through hands-on lessons. Work through b
 
 ## Try It Out
 
-**Live site:** [https://dingzeyu1029.github.io/git-101-web/](https://dingzeyu1029.github.io/git-101-web/)
+**Live site:** [https://itsdingze.github.io/git-101-web/](https://itsdingze.github.io/git-101-web/)
 
 Or run it locally:
 
 ```bash
-git clone https://github.com/dingzeyu1029/git-101-web.git
+git clone https://github.com/itsdingze/git-101-web.git
 cd git-101-web
 npm install
 npm run dev

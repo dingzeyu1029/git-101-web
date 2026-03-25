@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const REPO = 'dingzeyu1029/git-101-web'
+const REPO = 'itsdingze/git-101-web'
 const CACHE_KEY = 'gh-stars'
 
 export default function useGitHubStars(): number | null {

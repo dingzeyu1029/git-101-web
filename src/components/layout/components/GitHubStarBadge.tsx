@@ -1,7 +1,7 @@
 import { Github, Star } from 'lucide-react'
 import useGitHubStars from '../hooks/useGitHubStars'
 
-const REPO = 'dingzeyu1029/git-101-web'
+const REPO = 'itsdingze/git-101-web'
 
 export default function GitHubStarBadge() {
   const stars = useGitHubStars()
