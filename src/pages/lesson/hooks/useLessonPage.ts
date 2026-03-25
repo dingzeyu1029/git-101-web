@@ -1,10 +1,18 @@
 import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import type { Lesson, Step } from '../../../types'
 import useProgressStore from '../../../stores/progressStore'
 import lessons from '../../../data/lessons/index'
 import { useLessonNav } from '../../../hooks/useLessonNav'
 
-export default function useLessonPage(lessonId: string | undefined) {
+interface UseLessonPageResult {
+  lesson: Lesson | undefined
+  step: Step | undefined
+  currentStepIndex: number
+  parsedId: number
+}
+
+export default function useLessonPage(lessonId: string | undefined): UseLessonPageResult {
   const navigate = useNavigate()
   const parsedId = parseInt(lessonId ?? '', 10)
 

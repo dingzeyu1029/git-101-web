@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import type { QuizStep as QuizStepType } from '../../../types'
 import useProgressStore from '../../../stores/progressStore'
@@ -11,6 +11,7 @@ interface QuizStepProps {
 }
 
 export default function QuizStep({ step, lessonId }: QuizStepProps) {
+  const prefersReduced = useReducedMotion()
   const completeStep = useProgressStore((s) => s.completeStep)
   const isCompleted = useProgressStore((s) => !!s.completedSteps[`${lessonId}:${step.id}`])
 
@@ -36,7 +37,7 @@ export default function QuizStep({ step, lessonId }: QuizStepProps) {
 
       <motion.div
         className="space-y-3"
-        animate={shake ? { x: [-4, 4, -4, 4, 0] } : {}}
+        animate={shake && !prefersReduced ? { x: [-4, 4, -4, 4, 0] } : {}}
         transition={{ duration: 0.4 }}
       >
         {step.options.map((option, i) => {

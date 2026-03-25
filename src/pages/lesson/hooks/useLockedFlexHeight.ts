@@ -1,6 +1,6 @@
-import { useRef, useLayoutEffect } from 'react'
+import { type RefObject, useRef, useLayoutEffect } from 'react'
 
-export default function useLockedFlexHeight(dep: unknown) {
+export default function useLockedFlexHeight(dep: unknown): RefObject<HTMLDivElement | null> {
   const ref = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

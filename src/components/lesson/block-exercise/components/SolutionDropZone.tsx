@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { useDroppable } from '@dnd-kit/react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 interface SolutionDropZoneProps {
   children: ReactNode
@@ -10,6 +10,7 @@ interface SolutionDropZoneProps {
 }
 
 export default function SolutionDropZone({ children, solved, shakeSlots, overSolution }: SolutionDropZoneProps) {
+  const prefersReduced = useReducedMotion()
   const { ref } = useDroppable({ id: 'solution-area' })
 
   return (
@@ -25,7 +26,7 @@ export default function SolutionDropZone({ children, solved, shakeSlots, overSol
               ? 'border-text-muted bg-bg-secondary'
               : 'border-border bg-bg-secondary'
       }`}
-      animate={shakeSlots ? { x: [-4, 4, -4, 4, 0] } : {}}
+      animate={shakeSlots && !prefersReduced ? { x: [-4, 4, -4, 4, 0] } : {}}
       transition={{ duration: 0.3 }}
     >
       {children}

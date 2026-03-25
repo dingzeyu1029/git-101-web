@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import type { Stage, PhantomCommit } from '../../../types'
 import { computeLayout, computeConnections } from './layout'
 import { COMMIT_RADIUS, COMMIT_SPACING_Y, LANE_SPACING_X, PADDING, TRANSITION } from './constants'
@@ -12,6 +12,10 @@ interface GraphRendererProps {
 }
 
 export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRendererProps) {
+  const prefersReduced = useReducedMotion()
+  const instant = { enter: { duration: 0 }, exit: { duration: 0 } }
+  const transition = prefersReduced ? instant : TRANSITION
+
   const positions = useMemo(
     () => computeLayout(stage, svgHeight),
     [stage, svgHeight],
@@ -70,8 +74,8 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
             fill="none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: TRANSITION.exit }}
-            transition={TRANSITION.enter}
+            exit={{ opacity: 0, transition: transition.exit }}
+            transition={transition.enter}
           />
         ))}
         {phantoms.map(({ branch, pathD }) => (
@@ -84,8 +88,8 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
             fill="none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: TRANSITION.exit }}
-            transition={TRANSITION.enter}
+            exit={{ opacity: 0, transition: transition.exit }}
+            transition={transition.enter}
           />
         ))}
       </AnimatePresence>
@@ -102,8 +106,8 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
               key={`${commit.id}-${commit.branch}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: TRANSITION.exit }}
-              transition={TRANSITION.enter}
+              exit={{ opacity: 0, transition: transition.exit }}
+              transition={transition.enter}
             >
               <circle
                 cx={pos.x}
@@ -142,8 +146,8 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
             paintOrder="stroke"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: TRANSITION.exit }}
-            transition={TRANSITION.enter}
+            exit={{ opacity: 0, transition: transition.exit }}
+            transition={transition.enter}
           >
             New branch created
           </motion.text>
@@ -170,8 +174,8 @@ export default function GraphRenderer({ stage, svgHeight, svgWidth }: GraphRende
               key={`label-${branch.name}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: TRANSITION.exit }}
-              transition={TRANSITION.enter}
+              exit={{ opacity: 0, transition: transition.exit }}
+              transition={transition.enter}
             >
               <BranchLabel branch={branch} isHead={isHead} x={labelX} y={labelY} />
             </motion.g>

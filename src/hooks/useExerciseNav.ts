@@ -7,7 +7,7 @@ interface UseExerciseNavOptions {
   checkDisabled?: boolean
 }
 
-export default function useExerciseNav({ solved, checkFn, checkDisabled }: UseExerciseNavOptions) {
+export default function useExerciseNav({ solved, checkFn, checkDisabled }: UseExerciseNavOptions): void {
   const { registerCheck, clearCheck, reportStepSolved } = useLessonNav()
   const checkFnRef = useRef(checkFn)
 

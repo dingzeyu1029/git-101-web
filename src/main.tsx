@@ -1,12 +1,13 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App'
-import HomePage from './pages/home/HomePage'
-import LessonPage from './pages/lesson/LessonPage'
-import SummaryPage from './pages/summary/SummaryPage'
-import CheatsheetPage from './pages/cheatsheet/CheatsheetPage'
+
+const HomePage = lazy(() => import('./pages/home/HomePage'))
+const LessonPage = lazy(() => import('./pages/lesson/LessonPage'))
+const SummaryPage = lazy(() => import('./pages/summary/SummaryPage'))
+const CheatsheetPage = lazy(() => import('./pages/cheatsheet/CheatsheetPage'))
 
 const router = createBrowserRouter(
   [

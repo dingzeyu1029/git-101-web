@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import type { ConflictExerciseStep } from '../../../types'
 import useProgressStore from '../../../stores/progressStore'
@@ -25,6 +25,7 @@ function resolveContent(step: ConflictExerciseStep, resolution: Resolution): str
 }
 
 export default function ConflictExercise({ step, lessonId }: ConflictExerciseProps) {
+  const prefersReduced = useReducedMotion()
   const completeStep = useProgressStore((s) => s.completeStep)
   const isCompleted = useProgressStore((s) => !!s.completedSteps[`${lessonId}:${step.id}`])
 
@@ -96,7 +97,7 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
 
       <motion.div
         className="flex gap-3"
-        animate={shake ? { x: [-4, 4, -4, 4, 0] } : {}}
+        animate={shake && !prefersReduced ? { x: [-4, 4, -4, 4, 0] } : {}}
         transition={{ duration: 0.4 }}
       >
         {buttons.map(({ key, label, preview, activeColor }) => {

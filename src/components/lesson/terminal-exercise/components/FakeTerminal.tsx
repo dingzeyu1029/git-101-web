@@ -1,5 +1,5 @@
 import { type KeyboardEvent, type Ref, useState, useRef, useEffect, useImperativeHandle } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 type HistoryEntry = {
   id: number
@@ -31,6 +31,7 @@ export interface FakeTerminalHandle {
 let nextEntryId = 0
 
 export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, initialHistory = [], onInputChange, onEnter, className }: FakeTerminalProps) {
+  const prefersReduced = useReducedMotion()
   const [input, setInput] = useState('')
   const [history, setHistory] = useState<HistoryEntry[]>(initialHistory)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -122,14 +123,15 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="w-full bg-transparent text-terminal-text outline-none caret-transparent"
+                aria-label="Git command input"
                 spellCheck={false}
                 autoComplete="off"
               />
               <motion.span
                 className="absolute top-1/2 -translate-y-1/2 w-1.5 h-4.5 bg-terminal-text/80"
                 style={{ left: `${input.length * 0.6}em` }}
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.53, repeat: Infinity, repeatType: 'reverse' }}
+                animate={prefersReduced ? { opacity: 1 } : { opacity: [1, 0] }}
+                transition={prefersReduced ? undefined : { duration: 0.53, repeat: Infinity, repeatType: 'reverse' }}
               />
             </div>
           </div>
