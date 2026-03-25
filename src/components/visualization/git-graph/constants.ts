@@ -6,8 +6,8 @@ export const CHAR_WIDTH = 7
 export const CONTAINER_HEIGHT = 360
 
 export const COLORS = {
-  main: '#2563EB',
-  feature: '#16A34A',
+  main: 'var(--color-accent-blue)',
+  feature: 'var(--color-accent-green)',
 } as const
 
 export const TRANSITION = {

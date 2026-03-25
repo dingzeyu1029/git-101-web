@@ -51,7 +51,7 @@ export default function ConflictExercise({ step, lessonId }: ConflictExercisePro
     }
     setShake(true)
     setHintIndex((prev) => Math.min(prev + 1, (step.hints?.length ?? 1) - 1))
-    setTimeout(() => setShake(false), 600)
+    setTimeout(() => setShake(false), 500)
     return false
   }
 

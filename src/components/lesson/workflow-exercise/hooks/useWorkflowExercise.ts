@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import type { WorkflowSubStep } from '../../../../types'
+import type { WorkflowSubStep } from '@/types'
 
 function normalizeCommand(cmd: string): string {
   return cmd.trim().replace(/\s+/g, ' ').toLowerCase()

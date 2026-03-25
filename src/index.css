@@ -30,6 +30,9 @@
   --color-terminal-prompt: #6a9955;
   --color-terminal-muted: #999999;
   --color-terminal-error: #f44747;
+  --color-terminal-close: #FF5F57;
+  --color-terminal-minimize: #FEBC2E;
+  --color-terminal-maximize: #28C840;
 
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;

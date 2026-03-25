@@ -22,7 +22,7 @@ export default function LessonCard({ lesson, isCompleted, isCurrent }: LessonCar
       >
         <div
           className={`
-            flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium
+            shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium
             ${isCompleted
               ? 'bg-accent-green text-white'
               : 'bg-bg-card text-text-secondary border border-border'}
@@ -44,7 +44,7 @@ export default function LessonCard({ lesson, isCompleted, isCurrent }: LessonCar
           </p>
         </div>
 
-        <ChevronRight size={16} className="text-text-muted flex-shrink-0" />
+        <ChevronRight size={16} className="text-text-muted shrink-0" />
       </div>
     </Link>
   )

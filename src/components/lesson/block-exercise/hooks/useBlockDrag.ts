@@ -2,9 +2,9 @@ import { type Dispatch, type SetStateAction, useState, useRef } from 'react'
 import { move } from '@dnd-kit/helpers'
 import type { DragDropEventHandlers } from '@dnd-kit/react'
 import type { DragOperation } from '@dnd-kit/abstract'
-import useProgressStore from '../../../../stores/progressStore'
-import useExerciseNav from '../../../../hooks/useExerciseNav'
-import type { BlockExerciseStep } from '../../../../types'
+import useProgressStore from '@/stores/progressStore'
+import useExerciseNav from '@/hooks/useExerciseNav'
+import type { BlockExerciseStep } from '@/types'
 
 function arraysEqual(a: readonly string[], b: readonly string[]): boolean {
   return a.length === b.length && a.every((v, i) => v === b[i])
@@ -80,7 +80,7 @@ export default function useBlockDrag(step: BlockExerciseStep, lessonId: number):
     }
 
     setShakeSlots(true)
-    setTimeout(() => setShakeSlots(false), 600)
+    setTimeout(() => setShakeSlots(false), 500)
     setHintIndex((i) => Math.min(i + 1, (step.hints?.length || 1) - 1))
     return false
   }

@@ -50,7 +50,7 @@ export function computeConnections(stage: Stage, positions: Record<string, Posit
       const to = positions[commit.id]
       if (!from || !to) continue
 
-      const color = branchColorMap[commit.branch] ?? branchColorMap.main ?? '#888'
+      const color = branchColorMap[commit.branch] ?? branchColorMap.main ?? 'var(--color-text-muted)'
       let pathD: string
       if (from.x === to.x) {
         pathD = `M ${from.x} ${from.y} L ${to.x} ${to.y}`

@@ -12,6 +12,7 @@ export default function LessonPage() {
 
   useEffect(() => {
     stepRef.current?.focus()
+    stepRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
   }, [currentStepIndex])
 
   if (!lesson || !step) {

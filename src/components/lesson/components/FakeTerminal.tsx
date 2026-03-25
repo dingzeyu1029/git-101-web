@@ -87,9 +87,9 @@ export default function FakeTerminal({ ref, onSubmit, successOutput, disabled, i
     >
       {/* Terminal Buttons */}
       <div className="flex flex-row items-center gap-2 p-2 bg-terminal-bar border-b border-terminal-border shrink-0">
-        <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-        <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-        <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+        <div className="w-3 h-3 rounded-full bg-terminal-close" />
+        <div className="w-3 h-3 rounded-full bg-terminal-minimize" />
+        <div className="w-3 h-3 rounded-full bg-terminal-maximize" />
         <span className="ml-2 text-terminal-muted text-sm">terminal</span>
       </div>
 

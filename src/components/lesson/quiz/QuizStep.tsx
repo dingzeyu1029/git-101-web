@@ -25,7 +25,7 @@ export default function QuizStep({ step, lessonId }: QuizStepProps) {
       return true
     }
     setShake(true)
-    setTimeout(() => setShake(false), 600)
+    setTimeout(() => setShake(false), 500)
     return false
   }
 

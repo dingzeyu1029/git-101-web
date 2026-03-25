@@ -27,7 +27,7 @@ export default function SolutionDropZone({ children, solved, shakeSlots, overSol
               : 'border-border bg-bg-secondary'
       }`}
       animate={shakeSlots && !prefersReduced ? { x: [-4, 4, -4, 4, 0] } : {}}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4 }}
     >
       {children}
     </motion.div>

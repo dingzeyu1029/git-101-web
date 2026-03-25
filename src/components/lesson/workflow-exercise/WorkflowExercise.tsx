@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { CheckCircle } from 'lucide-react'
 import type { WorkflowExerciseStep } from '../../../types'
-import FakeTerminal, { type FakeTerminalHandle } from '../terminal-exercise/components/FakeTerminal'
+import FakeTerminal, { type FakeTerminalHandle } from '../components/FakeTerminal'
 import ExerciseControls from '../ExerciseControls'
 import useProgressStore from '../../../stores/progressStore'
 import useExerciseNav from '../../../hooks/useExerciseNav'

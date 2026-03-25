@@ -1,13 +1,14 @@
-import type { ComponentType } from 'react'
+import { lazy, Suspense, type ComponentType } from 'react'
 import type { ReadingStep as ReadingStepType } from '../../../types'
-import ThreePlaceModel from '../../visualization/ThreePlaceModel'
-import GitGraph from '../../visualization/git-graph/GitGraph'
-import ConflictMarkers from '../../visualization/ConflictMarkers'
-import DiffWalkthrough from '../../visualization/DiffWalkthrough'
-import ResetWalkthrough from '../../visualization/ResetWalkthrough'
-import RestoreWalkthrough from '../../visualization/RestoreWalkthrough'
 import useExerciseNav from '../../../hooks/useExerciseNav'
 import ContentBlock from './components/ContentBlock'
+
+const ThreePlaceModel = lazy(() => import('../../visualization/ThreePlaceModel'))
+const GitGraph = lazy(() => import('../../visualization/git-graph/GitGraph'))
+const ConflictMarkers = lazy(() => import('../../visualization/ConflictMarkers'))
+const DiffWalkthrough = lazy(() => import('../../visualization/DiffWalkthrough'))
+const ResetWalkthrough = lazy(() => import('../../visualization/ResetWalkthrough'))
+const RestoreWalkthrough = lazy(() => import('../../visualization/RestoreWalkthrough'))
 
 const VISUALIZATIONS: Record<string, ComponentType> = {
   'three-place-model': ThreePlaceModel,
@@ -36,8 +37,10 @@ export default function ReadingStep({ step }: ReadingStepProps) {
         <ContentBlock key={`${block.type}-${block.value.slice(0, 32)}`} block={block} />
       ))}
 
-      {step.visualization === 'git-graph' && <GitGraph scenario={step.visualizationVariant} />}
-      {Visualization && <Visualization />}
+      <Suspense fallback={<div className="min-h-48 bg-bg-card rounded-xl animate-pulse" />}>
+        {step.visualization === 'git-graph' && <GitGraph scenario={step.visualizationVariant} />}
+        {Visualization && <Visualization />}
+      </Suspense>
     </div>
   )
 }

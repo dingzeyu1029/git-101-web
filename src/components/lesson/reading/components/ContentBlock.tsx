@@ -1,4 +1,4 @@
-import type { ContentBlock as ContentBlockType } from '../../../../types'
+import type { ContentBlock as ContentBlockType } from '@/types'
 
 interface ContentBlockProps {
   block: ContentBlockType
@@ -10,7 +10,7 @@ export default function ContentBlock({ block }: ContentBlockProps) {
       return (
         <div
           className="text-sm text-text-secondary leading-relaxed"
-          // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml -- intentional: renders trusted lesson markdown
+          // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml -- TRUSTED: static developer-authored lesson content from src/data/lessons/; never user input
           dangerouslySetInnerHTML={{
             __html: block.value
               .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-blue">$1</a>')
